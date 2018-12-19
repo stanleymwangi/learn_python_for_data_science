@@ -13,11 +13,23 @@ Y = ["male", "male", "female", "male", "female", "female", "female",
      'female', 'male', 'male'
      ]
 
-# initialise the model
+# initialise the decision tree model
 classifier = tree.DecisionTreeClassifier();
 
-# train the model
+# initialise the linear SVC model
+
+
+# initialise the KNeighbours model
+
+
+# train the decision tree model
 classifier.fit(X, Y)
+
+# train the linear SVC model
+
+
+# train the KNeighbours model
+
 
 # serve up a prediction
 npc = [[170, 70, 7]]
