@@ -1,6 +1,6 @@
 from sklearn import tree
 from sklearn import svm
-
+from sklearn import neighbors
 
 # schema [height, weight, shoe_size]
 X = [[165, 77, 7], [170, 80, 6], [165, 65, 5], [180, 90, 10], [150, 50, 4], [165, 70, 5], [173, 60, 6],
@@ -22,7 +22,7 @@ classifier = tree.DecisionTreeClassifier();
 svm_classifier = svm.SVC(kernel="linear", C=1.0);
 
 # initialise the KNeighbours model
-
+knn_classifier = neighbors.KNeighborsClassifier()
 
 # train the decision tree model
 classifier.fit(X, Y)
@@ -31,15 +31,18 @@ classifier.fit(X, Y)
 svm_classifier.fit(X, Y)
 
 # train the KNeighbours model
+knn_classifier.fit(X,Y)
 
-
-# serve up a prediction
+# serve up predictions
 npc = [[170, 70, 7]]
-print(npc)
 
 prediction = classifier.predict(npc)
 svm_prediction = svm_classifier.predict(npc)
+knn_prediction = knn_classifier.predict(npc)
+
+# display predictions
 print("A height of {} cm, weight of {} kg and shoe size {} most likely means you are a:"
        .format(npc[0][0], npc[0][1], npc[0][2]))
 
-print("{}, (decision tree)\n{}, (linear svm)\n".format(prediction, svm_prediction))
+print("{}, (decision tree)\n{}, (linear svc)\n{}, (nearest neighbors)"
+      .format(prediction, svm_prediction, knn_prediction))
