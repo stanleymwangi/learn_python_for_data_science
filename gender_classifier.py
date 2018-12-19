@@ -1,4 +1,6 @@
 from sklearn import tree
+from sklearn import svm
+
 
 # schema [height, weight, shoe_size]
 X = [[165, 77, 7], [170, 80, 6], [165, 65, 5], [180, 90, 10], [150, 50, 4], [165, 70, 5], [173, 60, 6],
@@ -17,7 +19,7 @@ Y = ["male", "male", "female", "male", "female", "female", "female",
 classifier = tree.DecisionTreeClassifier();
 
 # initialise the linear SVC model
-
+svm_classifier = svm.SVC(kernel="linear", C=1.0);
 
 # initialise the KNeighbours model
 
@@ -25,14 +27,19 @@ classifier = tree.DecisionTreeClassifier();
 # train the decision tree model
 classifier.fit(X, Y)
 
-# train the linear SVC model
-
+# train the SVC model
+svm_classifier.fit(X, Y)
 
 # train the KNeighbours model
 
 
 # serve up a prediction
 npc = [[170, 70, 7]]
-prediction = classifier.predict(npc)[0]
-print("A height of {} cm, weight of {} kg and shoe size {} most likely means you are a {}"
-      .format(npc[0][0], npc[0][1], npc[0][2], prediction))
+print(npc)
+
+prediction = classifier.predict(npc)
+svm_prediction = svm_classifier.predict(npc)
+print("A height of {} cm, weight of {} kg and shoe size {} most likely means you are a:"
+       .format(npc[0][0], npc[0][1], npc[0][2]))
+
+print("{}, (decision tree)\n{}, (linear svm)\n".format(prediction, svm_prediction))
