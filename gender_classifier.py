@@ -16,7 +16,7 @@ Y = ["male", "male", "female", "male", "female", "female", "female",
      ]
 
 # initialise the decision tree model
-classifier = tree.DecisionTreeClassifier();
+dtree_classifier = tree.DecisionTreeClassifier();
 
 # initialise the linear SVC model
 svm_classifier = svm.SVC(kernel="linear", C=1.0);
@@ -25,7 +25,7 @@ svm_classifier = svm.SVC(kernel="linear", C=1.0);
 knn_classifier = neighbors.KNeighborsClassifier()
 
 # train the decision tree model
-classifier.fit(X, Y)
+dtree_classifier.fit(X, Y)
 
 # train the SVC model
 svm_classifier.fit(X, Y)
@@ -34,9 +34,9 @@ svm_classifier.fit(X, Y)
 knn_classifier.fit(X,Y)
 
 # serve up predictions
-npc = [[170, 70, 7]]
+npc = [[190, 80, 7]]
 
-prediction = classifier.predict(npc)
+dtree_prediction = dtree_classifier.predict(npc)
 svm_prediction = svm_classifier.predict(npc)
 knn_prediction = knn_classifier.predict(npc)
 
@@ -44,5 +44,5 @@ knn_prediction = knn_classifier.predict(npc)
 print("A height of {} cm, weight of {} kg and shoe size {} most likely means you are a:"
        .format(npc[0][0], npc[0][1], npc[0][2]))
 
-print("{}, (decision tree)\n{}, (linear svc)\n{}, (nearest neighbors)"
-      .format(prediction, svm_prediction, knn_prediction))
+print("- {}, (decision tree)\n- {}, (linear svc)\n- {}, (nearest neighbors)"
+      .format(dtree_prediction[0], svm_prediction[0], knn_prediction[0]))
