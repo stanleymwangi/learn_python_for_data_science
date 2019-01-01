@@ -6,5 +6,12 @@ from lightfm import LightFM
 movie_data = fetch_movielens(min_rating=4.0)
 
 # display properties of movie_data
-print("Training data ~ ", repr(movie_data["train"]), end="\n\n")
-print("Testing data ~ ", repr(movie_data["test"]))
+print('Training data ~ ', repr(movie_data['train']), end='\n\n')
+print('Testing data ~ ', repr(movie_data['test']))
+
+# create recommendation model
+# using warp (weighted approximate-rank pairwise) loss function
+recommendation_model = LightFM(loss='warp') # warp is both content + collaborative based
+
+# train recommendation model
+recommendation_model.fit(movie_data['train'], epochs=30, num_threads=2)
